@@ -789,7 +789,12 @@ footer{border-top:1px solid var(--board-line);background:var(--board-deep);paddi
           </div>
           <h2 id="contactH" data-i18n="contact.h">Zullen we kennismaken?</h2>
           <p class="sub" data-i18n="contact.sub">Vertel kort waar je team staat en waar het wringt — dan kijk ik met je mee. Vrijblijvend, koffie erbij.</p>
-          <form id="contactForm" novalidate>
+          <form id="contactForm" action="https://formsubmit.co/info@flowwolf.nl" method="POST" novalidate>
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <input type="hidden" name="_subject" value="Kennismaken via flowwolf.nl">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://www.flowwolf.nl/#contactZone">
             <div class="f-grid">
               <div class="field">
                 <label for="fName" data-i18n="contact.name">Naam</label>
@@ -806,7 +811,7 @@ footer{border-top:1px solid var(--board-line);background:var(--board-deep);paddi
             </div>
             <div class="f-actions">
               <button class="btn lime" type="submit" data-i18n="contact.send">Verstuur ticket →</button>
-              <p class="f-note" data-i18n="contact.note">Versturen opent je mailprogramma — of mail direct naar <a href="mailto:info@flowwolf.nl">info@flowwolf.nl</a>.</p>
+              <p class="f-note" data-i18n="contact.note">Je bericht komt direct bij mij binnen — of mail naar <a href="mailto:info@flowwolf.nl">info@flowwolf.nl</a>.</p>
             </div>
           </form>
         </article>
@@ -823,8 +828,8 @@ footer{border-top:1px solid var(--board-line);background:var(--board-deep);paddi
       </div>
       <div class="ticket sent-msg" role="status">
         <strong><svg width="18" height="18" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M4 11.5l5 5L18 6" stroke="#5a8a00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="contact.done">Ticket op Done!</span></strong>
-        <p style="color:var(--ink-2);margin-top:.3rem" data-i18n="contact.donep">Je mailprogramma is geopend met je bericht. Verstuur 'm daar — ik kom er snel bij je op terug.</p>
-        <button type="button" class="undo" id="undoSent" data-i18n="contact.undo">Mailprogramma niet geopend? Zet het ticket terug.</button>
+        <p style="color:var(--ink-2);margin-top:.3rem" data-i18n="contact.donep">Je bericht is verstuurd — ik kom er snel bij je op terug.</p>
+        <button type="button" class="undo" id="undoSent" data-i18n="contact.undo">Nog iets vergeten? Zet het ticket terug.</button>
       </div>
     </div>
   </section>
@@ -890,10 +895,10 @@ const I18N = {
     "contact.sub":"Tell me briefly where your team stands and where it hurts — I'll take a look with you. No strings attached, coffee included.",
     "contact.name":"Name","contact.mail":"Email","contact.msg":"Message",
     "contact.send":"Send ticket →",
-    "contact.note":"Sending opens your mail app — or email directly at ",
+    "contact.note":"Your message lands straight in my inbox — or email directly at ",
     "contact.done":"Ticket on Done!",
-    "contact.donep":"Your mail app has opened with your message. Send it there — I'll get back to you soon.",
-    "contact.undo":"Mail app didn't open? Put the ticket back.",
+    "contact.donep":"Your message has been sent — I'll get back to you soon.",
+    "contact.undo":"Forgot something? Put the ticket back.",
     "contact.mini":"Let's meet — you & Patrick",
     "meta.title":"FlowwolF — Interim Product Owner & CRO specialist | Patrick Wolf",
     "meta.desc":"Patrick Wolf (FlowwolF): freelance interim Product Owner & CRO specialist with 10 years of experience in digital growth. Worked for Wehkamp, Kaartje2Go and Uitgekookt, among others.",
@@ -1158,15 +1163,39 @@ document.getElementById('contactForm').addEventListener('submit', e=>{
   e.preventDefault();
   const f = e.target;
   if(!f.reportValidity()) return;
-  const name = f.name.value.trim(), mail = f.email.value.trim(), msg = f.message.value.trim();
+  const name = f.elements.name.value.trim(), mail = f.elements.email.value.trim(), msg = f.elements.message.value.trim();
   const en = document.documentElement.lang === 'en';
-  const subject = encodeURIComponent((en ? "Let's meet — " : 'Kennismaken — ') + name);
-  const body = encodeURIComponent(`${msg}\n\n— ${name}\n${mail}`);
-  location.href = `mailto:info@flowwolf.nl?subject=${subject}&body=${body}`;
-  const zone = document.getElementById('contactZone');
-  zone.classList.add('sent');
-  document.querySelector('.done-mini').hidden = false;
-  setTimeout(()=>{ requestAnimationFrame(drawLine); }, 750);
+  const btn = f.querySelector('button[type="submit"]');
+  const markSent = ()=>{
+    const zone = document.getElementById('contactZone');
+    zone.classList.add('sent');
+    document.querySelector('.done-mini').hidden = false;
+    setTimeout(()=>{ requestAnimationFrame(drawLine); }, 750);
+  };
+  btn.disabled = true;
+  fetch('https://formsubmit.co/ajax/info@flowwolf.nl', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      name: name,
+      email: mail,
+      message: msg,
+      _subject: (en ? "Let's meet — " : 'Kennismaken — ') + name,
+      _template: 'table',
+      _captcha: 'false',
+      _honey: f.elements._honey.value
+    })
+  })
+  .then(r => { if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+  .then(markSent)
+  .catch(()=>{
+    /* vangnet: open het mailprogramma met het bericht */
+    const subject = encodeURIComponent((en ? "Let's meet — " : 'Kennismaken — ') + name);
+    const body = encodeURIComponent(`${msg}\n\n— ${name}\n${mail}`);
+    location.href = `mailto:info@flowwolf.nl?subject=${subject}&body=${body}`;
+    markSent();
+  })
+  .finally(()=>{ btn.disabled = false; });
 });
 document.getElementById('undoSent').addEventListener('click', ()=>{
   const zone = document.getElementById('contactZone');
