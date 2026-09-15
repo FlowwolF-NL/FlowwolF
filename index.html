@@ -288,10 +288,11 @@ nav.main a:hover,nav.main a:focus-visible{color:#fff;background:rgba(255,255,255
 .hero-note{
   margin-top:2.6rem;text-align:center;font-family:var(--font-m);font-size:.66rem;
   letter-spacing:.1em;color:var(--ink-on-board-2);
+  background:var(--board);box-shadow:0 0 0 12px var(--board); /* maskeert de lijn */
 }
 
 /* ---------- the line ---------- */
-#lineSvg{position:absolute;top:0;left:0;pointer-events:none;z-index:1;overflow:visible}
+#lineSvg{position:absolute;top:0;left:0;pointer-events:none;z-index:0;overflow:visible}
 #lineSvg path{
   fill:none;stroke:var(--lime);stroke-width:3.5;stroke-linecap:round;
 }
@@ -307,12 +308,12 @@ main{position:relative;z-index:2}
 .stop-dot{
   position:absolute;width:13px;height:13px;border-radius:50%;
   background:var(--lime);border:3px solid var(--board);
-  z-index:1;pointer-events:none;
+  z-index:-1;pointer-events:none;
 }
 .line-puck{
   position:absolute;left:0;top:0;width:15px;height:15px;border-radius:50%;
   background:var(--lime);border:3px solid #fff;
-  z-index:2;pointer-events:none;will-change:transform;
+  z-index:-1;pointer-events:none;will-change:transform;
 }
 @media (prefers-reduced-motion:reduce){.line-puck{display:none}}
 
@@ -526,9 +527,7 @@ footer{border-top:1px solid var(--board-line);background:var(--board-deep);paddi
   .epic:nth-child(odd),.epic:nth-child(even){align-self:stretch;rotate:0deg;width:100%}
   .hero-ticket{rotate:0deg}
   .f-grid{grid-template-columns:1fr}
-  /* lijn op volle sterkte, maar onder de content in de stapelvolgorde */
-  #lineSvg{left:0;z-index:0}
-  .stop-dot,.line-puck{z-index:-1}
+  #lineSvg{left:0}
   /* koptekst van het board maskeert de lijn (zelfde kleur als achtergrond) */
   #board .sec-head,#board .sec-lede{background:var(--board);box-shadow:0 0 0 14px var(--board)}
 }
