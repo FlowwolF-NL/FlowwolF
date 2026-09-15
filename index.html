@@ -525,7 +525,9 @@ footer{border-top:1px solid var(--board-line);background:var(--board-deep);paddi
   .epic:nth-child(odd),.epic:nth-child(even){align-self:stretch;rotate:0deg;width:100%}
   .hero-ticket{rotate:0deg}
   .f-grid{grid-template-columns:1fr}
-  #lineSvg{left:0}
+  #lineSvg{left:0;opacity:.32}
+  #lineSvg path{stroke-width:2.5}
+  .stop-dot{opacity:.45}
 }
 </style>
 </head>
@@ -1069,7 +1071,10 @@ let puck = null;
 function updateLine(){
   if(prefersReduced || !pathLen) return;
   const mr = main.getBoundingClientRect();
-  const drawTo = Math.min(1, Math.max(0, (innerHeight*0.82 - mr.top) / main.offsetHeight));
+  const mob = innerWidth < 760;
+  /* mobiel: iets kleinere noemer zodat de lijn het eindpunt echt haalt */
+  const denom = mob ? Math.max(1, main.offsetHeight - innerHeight*0.35) : main.offsetHeight;
+  const drawTo = Math.min(1, Math.max(0, (innerHeight*0.82 - mr.top) / denom));
   path.style.strokeDashoffset = pathLen * (1 - drawTo);
   /* puck rides the tip of the drawn line */
   if(!puck){
@@ -1079,7 +1084,7 @@ function updateLine(){
   }
   const tip = document.getElementById('lineGhost').getPointAtLength(pathLen * drawTo);
   puck.style.transform = `translate(${(tip.x-7.5).toFixed(1)}px, ${(tip.y-7.5).toFixed(1)}px)`;
-  puck.style.opacity = drawTo > 0.005 && drawTo < 0.995 ? 1 : 0;
+  puck.style.opacity = drawTo > 0.005 && drawTo < 0.995 ? (mob ? .5 : 1) : 0;
 }
 
 /* ---------- reveals ---------- */
@@ -1178,7 +1183,8 @@ function motionTick(){
       const ent = clampN((innerHeight*0.92 - r.top) / (innerHeight*0.55), 0, 1);
       x = (1 - ease(ent)) * ax;
     }
-    el.style.translate = `${x.toFixed(1)}px ${(prog * parseFloat(el.dataset.plx)).toFixed(1)}px`;
+    const damp = innerWidth < 760 ? 0.2 : 1; /* mobiel: parallax sterk dempen zodat blokken niet overlappen */
+    el.style.translate = `${(x*damp).toFixed(1)}px ${(prog * parseFloat(el.dataset.plx) * damp).toFixed(1)}px`;
   });
   /* portrait drifts inside its frame */
   if(profilePhoto){
