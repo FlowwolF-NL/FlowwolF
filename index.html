@@ -1175,7 +1175,10 @@ document.getElementById('contactForm').addEventListener('submit', e=>{
     })
   })
   .then(r => { if(!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-  .then(markSent)
+  .then(d => {
+    if(d && (d.success === 'true' || d.success === true)){ markSent(); }
+    else { throw new Error('formsubmit: ' + (d && d.message)); }
+  })
   .catch(()=>{
     /* vangnet: open het mailprogramma met het bericht */
     const subject = encodeURIComponent((en ? "Let's meet - " : 'Kennismaken - ') + name);
