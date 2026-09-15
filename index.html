@@ -410,6 +410,9 @@ section{padding:clamp(3.6rem,9vh,6.5rem) 0;position:relative}
 .profile .info{padding:1.9rem 2.1rem}
 .profile h3{font-size:1.6rem;font-weight:730;letter-spacing:-.02em;margin:.7rem 0 .2rem}
 .profile .role{color:var(--ink-2);font-weight:500;margin-bottom:1rem}
+.side-acts{list-style:none;margin:1.1rem 0 1.3rem;padding:0;font-family:var(--font-m);font-size:.68rem;letter-spacing:.03em;color:var(--ink-2)}
+.side-acts li{display:flex;align-items:baseline;gap:.5rem;margin-top:.4rem}
+.side-acts li::before{content:"✓";color:#5a8a00;font-weight:700;flex:none}
 .profile .bio{color:var(--ink-2);font-size:.97rem;max-width:44em}
 .profile blockquote{
   margin:1.3rem 0;padding:1rem 1.2rem;background:#fff;border-radius:var(--radius-s);
@@ -755,6 +758,11 @@ footer{border-top:1px solid var(--board-line);background:var(--board-deep);paddi
             <span class="chip ghost" data-i18n="tag.cro">cro</span>
             <span class="chip ghost">crm</span>
           </div>
+          <ul class="side-acts">
+            <li data-i18n="wie.act1">Spreker · Salesforce Agentforce World Tour, Amsterdam (2025)</li>
+            <li data-i18n="wie.act2">Trainer datagedreven besluitvorming · Deltion College</li>
+            <li data-i18n="wie.act3">Lid CRO-expertgroep · Shopping Tomorrow</li>
+          </ul>
           <a class="btn ghost-d" href="https://www.linkedin.com/in/patrickwolfnl/" target="_blank" rel="noopener">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
             <span data-i18n="wie.li">Bekijk LinkedIn</span>
@@ -880,6 +888,9 @@ const I18N = {
     "wie.bio":"Fifteen years of experience in e-commerce and digital product teams. I started as a CRO expert at De Nieuwe Zaak, working for clients like Coop, Zeeman and Achmea. At Kaartje2go I then spent five and a half years building a data-driven CX team, from a one-man show to six professionals. After that I worked in-house at Wehkamp Retail Group, on CRM and A/B testing and as Product Owner UX. As a freelancer I helped totaalBED (replatforming to Shopify) and Uitgekookt (Salesforce and an experimentation culture), among others. Right now I'm interim Product Owner at CJ Wildlife, known for Vivara. The common thread: helping teams move forward with clear priorities and decisions based on data. Based in Zwolle, working for clients across the Netherlands. Professional where needed, informal where possible.",
     "wie.quote":"“I'm convinced that a sharp focus on customer experience delivers the best return.”",
     "wie.li":"View LinkedIn",
+    "wie.act1":"Speaker · Salesforce Agentforce World Tour, Amsterdam (2025)",
+    "wie.act2":"Trainer in data-driven decision-making · Deltion College",
+    "wie.act3":"Member of the Shopping Tomorrow CRO expert group",
     "contact.status":"Drag to Done","contact.h":"Shall we meet?",
     "contact.sub":"Tell me briefly where your team stands and where it hurts, and I'll take a look with you. The coffee's ready and there are no strings attached.",
     "contact.name":"Name","contact.mail":"Email","contact.msg":"Message",
