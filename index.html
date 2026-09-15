@@ -372,7 +372,7 @@ section{padding:clamp(3.6rem,9vh,6.5rem) 0;position:relative}
 .epic ul{margin:.9rem 0 0;padding:0;list-style:none;display:flex;gap:.5rem;flex-wrap:wrap}
 
 /* cases */
-.cases{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;align-items:start}
+.cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem;align-items:start}
 .case{overflow:hidden}
 .case summary{
   list-style:none;cursor:pointer;padding:1.4rem 1.5rem;position:relative;
@@ -687,6 +687,21 @@ footer{border-top:1px solid var(--board-line);background:var(--board-deep);paddi
         <span class="t-num" style="color:var(--ink-on-board-2)" data-i18n="cases.sub">ERVARINGEN · UIT DE PRAKTIJK</span>
       </div>
       <div class="cases">
+        <details class="ticket case rv" data-plx="30" data-plx-x="-60">
+          <summary>
+            <div class="t-meta"><span class="chip lime" data-i18n="tag.shippedcase">ervaring</span><span class="t-num">FLW-C4</span></div>
+            <p class="logo" style="font-weight:800;font-size:1.3rem;line-height:36px;margin:.95rem 0">CJ Wildlife</p>
+            <p style="font-weight:600" data-i18n="cases.c4t">13 webshops, één roadmap</p>
+            <span class="open-hint" aria-hidden="true">+</span>
+          </summary>
+          <div class="body">
+            <p data-i18n="cases.c4p">Sinds april 2026 interim Product Owner bij CJ Wildlife, bekend van Vivara. Ik laat dertien webshops tegelijkertijd doorontwikkelen: één backlog, één roadmap, dertien storefronts. Daarnaast tuigde ik een loyaliteitsprogramma op en maakte ik de transitie naar Cloudflare mogelijk.</p>
+            <div class="metrics">
+              <span class="chip tonal" data-i18n="cases.m4">2026–heden · interim PO</span>
+              <span class="chip tonal" data-i18n="cases.m4b">13 webshops · 1 backlog</span>
+            </div>
+          </div>
+        </details>
         <details class="ticket case rv" data-plx="24" data-plx-x="-90">
           <summary>
             <div class="t-meta"><span class="chip lime" data-i18n="tag.shippedcase">ervaring</span><span class="t-num">FLW-C1</span></div>
@@ -882,6 +897,9 @@ const I18N = {
     "cases.m1":"2022–2025 · 3 roles","cases.m1b":"A/B testing flow standardised",
     "cases.m2":"2016–2021 · CRO → PO CX","cases.m2b":"team of 1 → 6",
     "cases.m3":"2024–2026 · CXO → interim PO","cases.m3b":"Salesforce 360° customer profile",
+    "cases.c4t":"13 web shops, one roadmap",
+    "cases.c4p":"Interim Product Owner at CJ Wildlife, known for Vivara, since April 2026. I keep thirteen web shops evolving in parallel: one backlog, one roadmap, thirteen storefronts. I also set up a loyalty programme and enabled the transition to Cloudflare.",
+    "cases.m4":"2026–present · interim PO","cases.m4b":"13 web shops · 1 backlog",
     "wie.h":"The team member you bring in",
     "wie.avail":"interim · freelance","wie.chip":"TEAM MEMBER",
     "wie.role":"Interim Product Owner · CRO specialist",
