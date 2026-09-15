@@ -525,9 +525,9 @@ footer{border-top:1px solid var(--board-line);background:var(--board-deep);paddi
   .epic:nth-child(odd),.epic:nth-child(even){align-self:stretch;rotate:0deg;width:100%}
   .hero-ticket{rotate:0deg}
   .f-grid{grid-template-columns:1fr}
-  #lineSvg{left:0;opacity:.32}
-  #lineSvg path{stroke-width:2.5}
-  .stop-dot{opacity:.45}
+  /* lijn op volle sterkte, maar onder de content in de stapelvolgorde */
+  #lineSvg{left:0;z-index:0}
+  .stop-dot,.line-puck{z-index:-1}
 }
 </style>
 </head>
@@ -1084,7 +1084,7 @@ function updateLine(){
   }
   const tip = document.getElementById('lineGhost').getPointAtLength(pathLen * drawTo);
   puck.style.transform = `translate(${(tip.x-7.5).toFixed(1)}px, ${(tip.y-7.5).toFixed(1)}px)`;
-  puck.style.opacity = drawTo > 0.005 && drawTo < 0.995 ? (mob ? .5 : 1) : 0;
+  puck.style.opacity = drawTo > 0.005 && drawTo < 0.995 ? 1 : 0;
 }
 
 /* ---------- reveals ---------- */
