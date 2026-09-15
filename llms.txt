@@ -1,6 +1,6 @@
 # FlowwolF
 
-> FlowwolF is de freelance-praktijk van Patrick Wolf: interim Product Owner & CRO-specialist uit Zwolle, met ruim tien jaar ervaring in digitale groei, werkend voor e-commerce- en digitale teams in heel Nederland. Kernbelofte: "Ik breng daadkracht wanneer capaciteit of richting tijdelijk ontbreekt."
+> FlowwolF is de freelance-praktijk van Patrick Wolf: interim Product Owner & CRO-specialist uit Zwolle, met vijftien jaar ervaring in e-commerce en digitale productteams, werkend voor e-commerce- en digitale teams in heel Nederland. Kernbelofte: "Ik breng daadkracht wanneer capaciteit of richting tijdelijk ontbreekt."
 
 ## Diensten
 
@@ -11,6 +11,12 @@
 ## Over Patrick Wolf
 
 Patrick Wolf begon als CRO-expert bij De Nieuwe Zaak (klanten o.a. Coop, Zeeman, Achmea) en bouwde bij Kaartje2go een datagedreven CX-team op. Daarna werkte hij in loondienst bij Wehkamp Retail Group aan CRM, A/B-testing en als Product Owner UX. Als freelancer hielp hij onder meer totaalBED (replatforming naar Shopify) en Uitgekookt (Salesforce Service, Marketing en Data Cloud). Op dit moment is hij interim Product Owner bij CJ Wildlife (bekend van Vivara). Filosofie: een gerichte focus op de klantervaring levert het beste rendement op.
+
+## Nevenactiviteiten
+
+- Spreker op de Salesforce Agentforce World Tour, Amsterdam (2025)
+- Trainer datagedreven besluitvorming bij Deltion College
+- Lid CRO-expertgroep van Shopping Tomorrow
 
 ## Contact
 
