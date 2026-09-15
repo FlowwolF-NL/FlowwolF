@@ -528,6 +528,8 @@ footer{border-top:1px solid var(--board-line);background:var(--board-deep);paddi
   /* lijn op volle sterkte, maar onder de content in de stapelvolgorde */
   #lineSvg{left:0;z-index:0}
   .stop-dot,.line-puck{z-index:-1}
+  /* koptekst van het board maskeert de lijn (zelfde kleur als achtergrond) */
+  #board .sec-head,#board .sec-lede{background:var(--board);box-shadow:0 0 0 14px var(--board)}
 }
 </style>
 </head>
